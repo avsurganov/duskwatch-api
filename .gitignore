@@ -44,16 +44,6 @@ pip-delete-this-directory.txt
 # Environments
 .env
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-.venv/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Unit test / coverage reports
 htmlcov/
@@ -123,22 +113,9 @@ celerybeat.pid
 .ipynb_checkpoints
 
 # pyenv
-.python-version
 
 # dotenv
-.env
 .env.*
-
-# virtualenv
-venv/
-ENV/
-
-# Spyder
-.spyderproject
-.spyproject
-
-# Rope
-.ropeproject
 
 # mkdocs documentation
 /site
@@ -156,7 +133,6 @@ dmypy.json
 *.iml
 *.iws
 *.ipr
-.idea/
 
 # Windows
 Thumbs.db
@@ -174,11 +150,5 @@ Icon
 .Trashes
 __MACOSX
 
-# Pytest
-.pytest_cache/
-
 # DB
 *.db
-
-# IDEA
-.idea
