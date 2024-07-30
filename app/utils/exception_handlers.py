@@ -1,7 +1,7 @@
 from fastapi import Request, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.models.common.common_model import ErrorResponse
 from app.models.common.common_responses import common_responses
 
@@ -10,7 +10,6 @@ async def http_exception_handler(request: Request, exc: HTTPException):
     description = common_responses.get(exc.status_code, {}).get("description", "HTTP Error")
     response_data = ErrorResponse(
         status="error",
-        data={"message": exc.detail},
         description=description
     )
     return JSONResponse(
@@ -41,5 +40,17 @@ async def generic_exception_handler(request: Request, exc: Exception):
     )
     return JSONResponse(
         status_code=500,
+        content=response_data.dict()
+    )
+
+
+async def starlette_http_exception_handler(request: Request, exc: StarletteHTTPException):
+    description = common_responses.get(exc.status_code.real, {}).get("description", "HTTP Error")
+    response_data = ErrorResponse(
+        status="error",
+        description=description
+    )
+    return JSONResponse(
+        status_code=exc.status_code.real,
         content=response_data.dict()
     )

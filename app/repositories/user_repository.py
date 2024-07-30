@@ -27,8 +27,8 @@ class UserRepository:
             return None
 
     @staticmethod
-    def create_user(db: Session, user: RegisterUserRequest) -> Union[User, None]:
-        def generate_unique_user_id(db: Session):
+    def create_user(db: Session, user: RegisterUserRequest) -> Optional[User]:
+        def generate_unique_user_id():
             # Fetch all existing user IDs
             existing_ids = set(row[0] for row in db.query(User.id).all())
 
@@ -40,9 +40,9 @@ class UserRepository:
                     return user_id
         try:
             db_user = User(
-                id=generate_unique_user_id(db),
+                id=generate_unique_user_id(),
                 email=user.email,
-                hashed_password=get_password_hash(user.password)
+                hashed_password=get_password_hash(user.password.get_secret_value())
             )
             db.add(db_user)
             db.commit()
