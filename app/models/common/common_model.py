@@ -1,4 +1,4 @@
-from typing import TypeVar, Generic, Dict, Any
+from typing import TypeVar, Generic, Dict, Any, Optional
 
 from pydantic import BaseModel
 
@@ -10,7 +10,11 @@ class ApiResponse(BaseModel, Generic[T]):
     data: T
 
 
+class OperationResult(BaseModel):
+    success: bool
+
+
 class ErrorResponse(BaseModel):
     status: str
     description: str
-    data: Dict[str, Any]
+    data: Optional[Dict[str, Any]] = None

@@ -10,6 +10,7 @@ from app.db.base_class import Base
 
 # Import models for Base 'autogenerate support'
 from app.schemas.users_schema import User
+from app.schemas.campaigns_schema import Campaign
 
 # Load .env files
 load_dotenv()
